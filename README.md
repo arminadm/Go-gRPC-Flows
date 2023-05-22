@@ -1,1 +1,1 @@
-# Go-gRPC-Flows
+# Go-gRPC-Methods
