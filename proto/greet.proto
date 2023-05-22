@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option go_package = "./gen";
+
+package greet_proto;
+
+service GreetService {
+    // Client sends names (Namelist) to the server and server returns messages (MessageList) back
+    
+    // simple RPC
+    rpc SimpleRPC(NoParam) returns (HelloResponse);
+    // client streaming RPC
+    rpc ClientStreamingRPC(stream HelloRequest) returns (MessageList);
+    // server streaming RPC
+    rpc ServerStreamingRPC(HelloRequest) returns (stream HelloResponse);
+    // bidirectional streaming RPC
+    rpc bidirectionalStreamingRPC(stream HelloRequest) returns (stream HelloResponse);
+}
+
+message NoParam {};
+
+message HelloRequest {
+    string name = 1;
+}
+
+message HelloResponse {
+    string message = 1;
+}
+
+message NameList {
+    repeated string names = 1;
+}
+
+message MessageList {
+    repeated string messages = 1;
+}
+
