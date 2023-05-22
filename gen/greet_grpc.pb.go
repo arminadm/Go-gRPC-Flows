@@ -34,7 +34,7 @@ type GreetServiceClient interface {
 	// client streaming RPC
 	ClientStreamingRPC(ctx context.Context, opts ...grpc.CallOption) (GreetService_ClientStreamingRPCClient, error)
 	// server streaming RPC
-	ServerStreamingRPC(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (GreetService_ServerStreamingRPCClient, error)
+	ServerStreamingRPC(ctx context.Context, in *NameList, opts ...grpc.CallOption) (GreetService_ServerStreamingRPCClient, error)
 	// bidirectional streaming RPC
 	BidirectionalStreamingRPC(ctx context.Context, opts ...grpc.CallOption) (GreetService_BidirectionalStreamingRPCClient, error)
 }
@@ -90,7 +90,7 @@ func (x *greetServiceClientStreamingRPCClient) CloseAndRecv() (*MessageList, err
 	return m, nil
 }
 
-func (c *greetServiceClient) ServerStreamingRPC(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (GreetService_ServerStreamingRPCClient, error) {
+func (c *greetServiceClient) ServerStreamingRPC(ctx context.Context, in *NameList, opts ...grpc.CallOption) (GreetService_ServerStreamingRPCClient, error) {
 	stream, err := c.cc.NewStream(ctx, &GreetService_ServiceDesc.Streams[1], GreetService_ServerStreamingRPC_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
@@ -162,7 +162,7 @@ type GreetServiceServer interface {
 	// client streaming RPC
 	ClientStreamingRPC(GreetService_ClientStreamingRPCServer) error
 	// server streaming RPC
-	ServerStreamingRPC(*HelloRequest, GreetService_ServerStreamingRPCServer) error
+	ServerStreamingRPC(*NameList, GreetService_ServerStreamingRPCServer) error
 	// bidirectional streaming RPC
 	BidirectionalStreamingRPC(GreetService_BidirectionalStreamingRPCServer) error
 	mustEmbedUnimplementedGreetServiceServer()
@@ -178,7 +178,7 @@ func (UnimplementedGreetServiceServer) SimpleRPC(context.Context, *NoParam) (*He
 func (UnimplementedGreetServiceServer) ClientStreamingRPC(GreetService_ClientStreamingRPCServer) error {
 	return status.Errorf(codes.Unimplemented, "method ClientStreamingRPC not implemented")
 }
-func (UnimplementedGreetServiceServer) ServerStreamingRPC(*HelloRequest, GreetService_ServerStreamingRPCServer) error {
+func (UnimplementedGreetServiceServer) ServerStreamingRPC(*NameList, GreetService_ServerStreamingRPCServer) error {
 	return status.Errorf(codes.Unimplemented, "method ServerStreamingRPC not implemented")
 }
 func (UnimplementedGreetServiceServer) BidirectionalStreamingRPC(GreetService_BidirectionalStreamingRPCServer) error {
@@ -242,7 +242,7 @@ func (x *greetServiceClientStreamingRPCServer) Recv() (*HelloRequest, error) {
 }
 
 func _GreetService_ServerStreamingRPC_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(HelloRequest)
+	m := new(NameList)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}

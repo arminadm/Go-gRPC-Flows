@@ -23,11 +23,11 @@ func main() {
 
 	// create list of names as request body
 	names := &pb.NameList{
-		Names: []string{"Armin", "Mehrdad", "Asal", "Ali"},
+		Names: []string{"Armin", "Mehrdad", "Alice", "Bob"},
 	}
 
 	// calling the Flows, un comment each flow that you need and comment the rest
-	// CallSimpleRPC(client)                 // Simple gRPC
-	CallClientStreamingRPC(client, names) //
-
+	// CallSimpleRPC(client)
+	// CallClientStreamingRPC(client, names)
+	CallServerStreamingRPC(client, names)
 }
