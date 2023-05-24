@@ -29,5 +29,6 @@ func main() {
 	// calling the Flows, un comment each flow that you need and comment the rest
 	// CallSimpleRPC(client)
 	// CallClientStreamingRPC(client, names)
-	CallServerStreamingRPC(client, names)
+	// CallServerStreamingRPC(client, names)
+	CallBidirectionalStreamingRPC(client, names)
 }
