@@ -9,11 +9,11 @@ We have implemented a simple gRPC server and client with the following functiona
 - bidirectional streaming RPC
 ___
 # How to use
-there are 4 different functions in client/main.go
+there are 4 different functions in `client/main.go`
 
 each function stands for one the methods
 
-1- uncomment each function that you want to use and comment the rest
+1- uncomment each function that you want to use and comment the rest (`at client/main.go`)
 
 2- open two different terminal, use one for opening client folder `cd client`
 
